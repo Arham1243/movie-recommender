@@ -2,11 +2,24 @@ import streamlit as st
 import pickle
 import pandas as pd
 import requests
+from io import BytesIO
 
 
 movie_dict = pickle.load(open("pkl-files/movie_dict.pkl","rb"))
 movies = pd.DataFrame(movie_dict)
-similarity= pickle.load(open("https://demo-designprojects.com/demo/test/similarity.pkl","rb"))
+similarity_url = "https://demo-designprojects.com/demo/test/similarity.pkl"
+
+response = requests.get(similarity_url)
+
+# Check if the request was successful (status code 200)
+if response.status_code == 200:
+    # Load the pickle file from the response content
+    similarity = pickle.loads(response.content)
+    # Now you can use the loaded data as needed
+else:
+    # Handle the case where the request was not successful
+    print("Failed to download the pickle file.")
+# similarity= pickle.load(open("https://demo-designprojects.com/demo/test/similarity.pkl","rb"))
 
 def get_movie_poster(movie_title):
     api_key = '99f3b2c3'
