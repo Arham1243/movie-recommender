@@ -6,7 +6,7 @@ import requests
 
 movie_dict = pickle.load(open("pkl-files/movie_dict.pkl","rb"))
 movies = pd.DataFrame(movie_dict)
-similarity= pickle.load(open("pkl-files/similarity.pkl","rb"))
+similarity= pickle.load(open("https://demo-designprojects.com/demo/test/similarity.pkl","rb"))
 
 def get_movie_poster(movie_title):
     api_key = '99f3b2c3'
